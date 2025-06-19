@@ -1,7 +1,8 @@
 /* Base styles */
 body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
+  font-family: 'Helvetica Neue', sans-serif;
+  background: #1f1f1f;
+  color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
@@ -20,7 +21,7 @@ body {
 
 /* Main exercise box */
 .container {
-  background: white;
+  background-color: #2c2c2c;
   padding: 2em;
   border-radius: 10px;
   max-width: 600px;
@@ -28,13 +29,14 @@ body {
   margin: 0 auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   flex: 1 1 500px;
+  border: 1px solid #444;
 }
 
 /* Buttons */
 button {
   padding: 1em 2em;
   font-size: 1em;
-  background-color: #0077cc;
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,7 +45,7 @@ button {
 }
 
 button:hover {
-  background-color: #005fa3;
+  background-color: #357ABD;
 }
 
 /* Image styling */
@@ -65,13 +67,14 @@ img {
   right: 0;
   width: 300px;
   height: 100vh;
-  background: #fff;
+  background-color: #2c2c2c;
   padding: 1em;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid #444;
   text-align: left;
   z-index: 1000;
+  color: #f4f4f4;
 
   /* Slide-in animation */
   transform: translateX(0);
