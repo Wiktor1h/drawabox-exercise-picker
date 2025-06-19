@@ -6,14 +6,16 @@ body {
   padding: 0;
 }
 
-/* Flex layout to place main and settings side by side */
+/* Flex layout: main content + space for sidebar */
 .main-layout {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 2em;
   padding: 2em;
-  flex-wrap: wrap; /* responsive */
+  padding-right: 320px; /* Leave room for fixed sidebar */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* Main exercise box */
@@ -22,7 +24,7 @@ body {
   padding: 2em;
   border-radius: 10px;
   max-width: 600px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   flex: 1 1 500px;
 }
 
@@ -54,17 +56,32 @@ img {
   display: none;
 }
 
-/* Settings panel styles (default as right panel) */
+/* Fixed Settings Panel on the right */
 .settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 300px;
+  height: 100vh;
   background: #fff;
   padding: 1em;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  border-left: 1px solid #ddd;
   text-align: left;
-  flex-shrink: 0;
+  z-index: 1000;
+
+  /* Slide-in animation */
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
+/* Slide-out when hidden (you must toggle .slide-out instead of .hidden if using this) */
+.settings-panel.slide-out {
+  transform: translateX(100%);
+}
+
+/* Settings content styles */
 .settings-panel h3 {
   margin-top: 0;
 }
@@ -72,6 +89,7 @@ img {
 .settings-panel ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .settings-panel li {
@@ -80,28 +98,25 @@ img {
   padding-bottom: 1em;
 }
 
-
-.settings-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 1000;
-}
-.main-layout {
-  padding-right: 320px;
-}
-
+/* Responsive behavior: sidebar becomes full-width on small screens */
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
     align-items: center;
+    padding-right: 0;
   }
 
   .settings-panel {
+    position: static;
     width: 100%;
+    height: auto;
+    border-left: none;
     box-shadow: none;
     border-radius: 0;
+    transform: translateX(0);
+  }
+
+  .settings-panel.slide-out {
+    display: none;
   }
 }
