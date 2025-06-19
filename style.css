@@ -31,3 +31,19 @@ button:hover {
 .hidden {
   display: none;
 }
+#settingsMenu {
+  background: white;
+  padding: 1em;
+  border-radius: 10px;
+  margin-top: 1em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#settingsMenu ul {
+  list-style: none;
+  padding: 0;
+}
+
+#settingsMenu li {
+  margin-bottom: 0.5em;
+}

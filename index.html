@@ -7,6 +7,14 @@
 </head>
 <body>
   <div class="container">
+    <button id="settingsButton">⚙️ Settings</button>
+
+<div id="settingsMenu" class="hidden">
+  <h3>Exercise Settings</h3>
+  <ul id="exerciseSettingsList"></ul>
+  <button onclick="closeSettings()">Close</button>
+</div>
+
     <h1>Random Exercise Picker</h1>
     <button id="pickButton">Pick an Exercise</button>
     <div id="exerciseDisplay" class="hidden">
