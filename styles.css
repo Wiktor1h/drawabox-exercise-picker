@@ -80,7 +80,7 @@ img {
   padding-bottom: 1em;
 }
 
-/* Optional: fixed sidebar instead of flex layout (uncomment to use)
+
 .settings-panel {
   position: fixed;
   top: 0;
@@ -92,7 +92,6 @@ img {
 .main-layout {
   padding-right: 320px;
 }
-*/
 
 @media (max-width: 768px) {
   .main-layout {
