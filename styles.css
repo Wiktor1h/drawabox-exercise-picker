@@ -1,25 +1,24 @@
-/* Base styles */
+/* Drawabox-inspired dark theme */
 body {
-  font-family: 'Helvetica Neue', sans-serif;
-  background: #1f1f1f;
+  font-family: 'Arial', sans-serif;
+  background-color: #1f1f1f;
   color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
 
-/* Flex layout: main content + space for sidebar */
+/* Layout */
 .main-layout {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
+  flex-direction: row;
+  align-items: flex-start;
   padding: 2em;
-  padding-right: 320px; /* Leave room for fixed sidebar */
-  min-height: 100vh;
+  padding-right: 320px;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
-/* Main exercise box */
+/* Main content box */
 .container {
   background-color: #2c2c2c;
   padding: 2em;
@@ -27,40 +26,44 @@ body {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   flex: 1 1 500px;
-  border: 1px solid #444;
 }
 
-/* Buttons */
+/* Exercise styling */
+.exercise-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
 button {
-  padding: 1em 2em;
+  padding: 0.75em 1.5em;
+  margin: 0.5em 0.25em;
   font-size: 1em;
   background-color: #4a90e2;
-  color: white;
   border: none;
   border-radius: 5px;
+  color: white;
   cursor: pointer;
-  margin: 0.5em 0.25em;
 }
 
 button:hover {
   background-color: #357ABD;
 }
 
-/* Image styling */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* Hide elements when needed */
 .hidden {
   display: none;
 }
 
-/* Fixed Settings Panel on the right */
+/* Fixed right settings panel */
 .settings-panel {
   position: fixed;
   top: 0;
@@ -69,24 +72,12 @@ img {
   height: 100vh;
   background-color: #2c2c2c;
   padding: 1em;
-  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.4);
   overflow-y: auto;
   border-left: 1px solid #444;
-  text-align: left;
   z-index: 1000;
-  color: #f4f4f4;
-
-  /* Slide-in animation */
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
 }
 
-/* Slide-out when hidden (you must toggle .slide-out instead of .hidden if using this) */
-.settings-panel.slide-out {
-  transform: translateX(100%);
-}
-
-/* Settings content styles */
 .settings-panel h3 {
   margin-top: 0;
 }
@@ -94,20 +85,18 @@ img {
 .settings-panel ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .settings-panel li {
   margin-bottom: 1.5em;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
   padding-bottom: 1em;
 }
 
-/* Responsive behavior: sidebar becomes full-width on small screens */
+/* Responsive */
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
-    align-items: center;
     padding-right: 0;
   }
 
@@ -118,10 +107,5 @@ img {
     border-left: none;
     box-shadow: none;
     border-radius: 0;
-    transform: translateX(0);
-  }
-
-  .settings-panel.slide-out {
-    display: none;
   }
 }

@@ -1,122 +1,78 @@
-let exercises = [
+const lessons = [
   {
-    name: "Push-ups",
-    description: "A basic upper body exercise.",
-    details: "Do 3 sets of 15 reps.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Push_up.gif",
+    name: "Lesson 1: Lines & Ellipses",
     enabled: true,
-    weight: 1
+    exercises: [
+      {
+        name: "Superimposed Lines",
+        image: "images/superimposed_lines.jpg",
+        description: "Draw straight lines confidently from one point to another."
+      },
+      {
+        name: "Ghosted Lines",
+        image: "images/ghosted_lines.jpg",
+        description: "Practice ghosting lines and executing them confidently."
+      }
+    ]
   },
   {
-    name: "Plank",
-    description: "Core strengthening exercise.",
-    details: "Hold for 60 seconds.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/3/32/Plank_%28exercise%29.gif",
-    enabled: true,
-    weight: 1
-  },
-  {
-    name: "Jumping Jacks",
-    description: "Full-body cardio exercise.",
-    details: "Do 3 sets of 30 reps.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/1/11/Jumping_Jacks.gif",
-    enabled: true,
-    weight: 1
+    name: "Lesson 2: Boxes",
+    enabled: false,
+    exercises: [
+      {
+        name: "Rough Perspective",
+        image: "images/rough_perspective.jpg",
+        description: "Draw boxes in rough perspective aligned to a vanishing point."
+      },
+      {
+        name: "Rotated Boxes",
+        image: "images/rotated_boxes.jpg",
+        description: "Practice rotating boxes while keeping edges aligned."
+      }
+    ]
   }
+  // Add more lessons here...
 ];
 
-// Pick a random exercise based on weights
-function pickWeightedRandomExercise() {
-  const pool = exercises
-    .filter(ex => ex.enabled)
-    .flatMap(ex => Array(ex.weight).fill(ex));
-
-  if (pool.length === 0) {
-    alert("No exercises enabled!");
-    return null;
+function pickRandomExercise() {
+  const enabledLessons = lessons.filter(lesson => lesson.enabled);
+  if (enabledLessons.length === 0) {
+    alert("Please enable at least one lesson.");
+    return;
   }
 
-  const randomIndex = Math.floor(Math.random() * pool.length);
-  return pool[randomIndex];
-}
-
-// Event: Pick button
-document.getElementById("pickButton").addEventListener("click", () => {
-  const exercise = pickWeightedRandomExercise();
-  if (!exercise) return;
+  const lesson = enabledLessons[Math.floor(Math.random() * enabledLessons.length)];
+  const exercise = lesson.exercises[Math.floor(Math.random() * lesson.exercises.length)];
 
   document.getElementById("exerciseName").textContent = exercise.name;
   document.getElementById("exerciseDescription").textContent = exercise.description;
-  document.getElementById("exerciseDetails").textContent = exercise.details;
-  document.getElementById("exerciseImage").src = exercise.image;
-  document.getElementById("exerciseImage").alt = exercise.name;
+  const image = document.getElementById("exerciseImage");
+  image.src = exercise.image;
+  image.alt = exercise.name;
+  image.classList.remove("hidden");
+}
 
-  document.getElementById("exerciseDisplay").classList.remove("hidden");
-});
-
-// Event: Settings toggle button
+// Settings menu logic
 document.getElementById("settingsButton").addEventListener("click", () => {
-  const menu = document.getElementById("settingsMenu");
-
-  // Toggle visibility
-  if (menu.classList.contains("hidden")) {
-    buildSettingsMenu();
-    menu.classList.remove("hidden");
-  } else {
-    menu.classList.add("hidden");
-  }
-});
-
-// Build the settings menu dynamically
-function buildSettingsMenu() {
   const settingsList = document.getElementById("exerciseSettingsList");
   settingsList.innerHTML = "";
 
-  exercises.forEach((ex, index) => {
+  lessons.forEach((lesson, index) => {
     const li = document.createElement("li");
-
-    const name = document.createElement("strong");
-    name.textContent = ex.name;
-    li.appendChild(name);
-    li.appendChild(document.createElement("br"));
-
-    // Enabled checkbox
-    const checkboxLabel = document.createElement("label");
-    checkboxLabel.textContent = " Enabled: ";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = ex.enabled;
-    checkbox.addEventListener("change", () => {
-      exercises[index].enabled = checkbox.checked;
-    });
-
-    checkboxLabel.prepend(checkbox);
-    li.appendChild(checkboxLabel);
-    li.appendChild(document.createElement("br"));
-
-    // Rarity slider
-    const sliderLabel = document.createElement("label");
-    sliderLabel.textContent = " Rarity: ";
-
-    const range = document.createElement("input");
-    range.type = "range";
-    range.min = 1;
-    range.max = 5;
-    range.value = ex.weight;
-
-    const weightText = document.createElement("span");
-    weightText.textContent = ` (${ex.weight})`;
-
-    range.addEventListener("input", () => {
-      exercises[index].weight = parseInt(range.value);
-      weightText.textContent = ` (${range.value})`;
-    });
-
-    sliderLabel.appendChild(range);
-    sliderLabel.appendChild(weightText);
-    li.appendChild(sliderLabel);
-
+    li.innerHTML = `
+      <strong>${lesson.name}</strong><br>
+      <label>
+        <input type="checkbox" ${lesson.enabled ? "checked" : ""} 
+               onchange="toggleLesson(${index})">
+        Enabled
+      </label>
+    `;
     settingsList.appendChild(li);
   });
+
+  document.getElementById("settingsMenu").classList.toggle("hidden");
+});
+
+function toggleLesson(index) {
+  lessons[index].enabled = !lessons[index].enabled;
 }
