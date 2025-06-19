@@ -1,0 +1,108 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+/* Flex layout to place main and settings side by side */
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2em;
+  padding: 2em;
+  flex-wrap: wrap; /* responsive */
+}
+
+/* Main exercise box */
+.container {
+  background: white;
+  padding: 2em;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex: 1 1 500px;
+}
+
+/* Buttons */
+button {
+  padding: 1em 2em;
+  font-size: 1em;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.5em 0.25em;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Hide elements when needed */
+.hidden {
+  display: none;
+}
+
+/* Settings panel styles (default as right panel) */
+.settings-panel {
+  width: 300px;
+  background: #fff;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.settings-panel h3 {
+  margin-top: 0;
+}
+
+.settings-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.settings-panel li {
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+}
+
+/* Optional: fixed sidebar instead of flex layout (uncomment to use)
+.settings-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+}
+.main-layout {
+  padding-right: 320px;
+}
+*/
+
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .settings-panel {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
