@@ -9,8 +9,8 @@ body {
 /* Flex layout: main content + space for sidebar */
 .main-layout {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: 2em;
   padding: 2em;
   padding-right: 320px; /* Leave room for fixed sidebar */
@@ -24,6 +24,8 @@ body {
   padding: 2em;
   border-radius: 10px;
   max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   flex: 1 1 500px;
 }
