@@ -1,78 +1,41 @@
-const lessons = [
-  {
-    name: "Lesson 1: Lines & Ellipses",
-    enabled: true,
-    exercises: [
-      {
-        name: "Superimposed Lines",
-        image: "images/superimposed_lines.jpg",
-        description: "Draw straight lines confidently from one point to another."
-      },
-      {
-        name: "Ghosted Lines",
-        image: "images/ghosted_lines.jpg",
-        description: "Practice ghosting lines and executing them confidently."
-      }
-    ]
-  },
-  {
-    name: "Lesson 2: Boxes",
-    enabled: false,
-    exercises: [
-      {
-        name: "Rough Perspective",
-        image: "images/rough_perspective.jpg",
-        description: "Draw boxes in rough perspective aligned to a vanishing point."
-      },
-      {
-        name: "Rotated Boxes",
-        image: "images/rotated_boxes.jpg",
-        description: "Practice rotating boxes while keeping edges aligned."
-      }
-    ]
-  }
-  // Add more lessons here...
+// Example exercise pool
+const exercises = [
+  { name: "Lines", lesson: 1, image: "images/lines.png" },
+  { name: "Ellipses", lesson: 1, image: "images/ellipses.png" },
+  { name: "Boxes", lesson: 2, image: "images/boxes.png" },
+  { name: "Organic Forms", lesson: 3, image: "images/organic-forms.png" },
+  { name: "Texture Analysis", lesson: 4, image: "images/texture-analysis.png" },
+  { name: "Form Intersections", lesson: 5, image: "images/form-intersections.png" },
+  { name: "Object Construction", lesson: 6, image: "images/object-construction.png" },
+  { name: "Invented Forms", lesson: 7, image: "images/invented-forms.png" }
 ];
 
+// Display a random exercise from enabled lessons
 function pickRandomExercise() {
-  const enabledLessons = lessons.filter(lesson => lesson.enabled);
-  if (enabledLessons.length === 0) {
-    alert("Please enable at least one lesson.");
+  const lessonLevel = parseInt(document.getElementById("lessonInput").value);
+
+  const pool = exercises.filter(ex => ex.lesson <= lessonLevel);
+  if (pool.length === 0) {
+    displayExercise({ name: "No exercises available", image: "" });
     return;
   }
 
-  const lesson = enabledLessons[Math.floor(Math.random() * enabledLessons.length)];
-  const exercise = lesson.exercises[Math.floor(Math.random() * lesson.exercises.length)];
-
-  document.getElementById("exerciseName").textContent = exercise.name;
-  document.getElementById("exerciseDescription").textContent = exercise.description;
-  const image = document.getElementById("exerciseImage");
-  image.src = exercise.image;
-  image.alt = exercise.name;
-  image.classList.remove("hidden");
+  const randomExercise = pool[Math.floor(Math.random() * pool.length)];
+  displayExercise(randomExercise);
 }
 
-// Settings menu logic
-document.getElementById("settingsButton").addEventListener("click", () => {
-  const settingsList = document.getElementById("exerciseSettingsList");
-  settingsList.innerHTML = "";
-
-  lessons.forEach((lesson, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${lesson.name}</strong><br>
-      <label>
-        <input type="checkbox" ${lesson.enabled ? "checked" : ""} 
-               onchange="toggleLesson(${index})">
-        Enabled
-      </label>
-    `;
-    settingsList.appendChild(li);
-  });
-
-  document.getElementById("settingsMenu").classList.toggle("hidden");
-});
-
-function toggleLesson(index) {
-  lessons[index].enabled = !lessons[index].enabled;
+// Show exercise details in the DOM
+function displayExercise(ex) {
+  const container = document.querySelector(".container");
+  container.innerHTML = `
+    <div class="exercise-name">${ex.name}</div>
+    ${ex.image ? `<img src="${ex.image}" alt="${ex.name}">` : ""}
+    <button onclick="pickRandomExercise()">Pick Another</button>
+  `;
 }
+
+// Event listener for lesson input change
+document.getElementById("lessonInput").addEventListener("change", pickRandomExercise);
+
+// Initialize with a random exercise from lesson 1
+pickRandomExercise();
