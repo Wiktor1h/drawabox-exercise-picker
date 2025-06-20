@@ -5,6 +5,11 @@ body {
   color: #f4f4f4;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* Layout */
@@ -12,10 +17,11 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 2em;
-  padding-right: 320px;
   box-sizing: border-box;
-  min-height: 100vh;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2em;
 }
 
 /* Main content box */
@@ -95,9 +101,15 @@ button:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+  body {
+    padding: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .main-layout {
     flex-direction: column;
-    padding-right: 0;
+    padding: 1em;
   }
 
   .settings-panel {
@@ -107,5 +119,11 @@ button:hover {
     border-left: none;
     box-shadow: none;
     border-radius: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    padding-right: 320px; /* reserve space for settings panel */
   }
 }
