@@ -128,3 +128,13 @@ button:hover {
     padding-right: 320px; /* reserve space for settings panel */
   }
 }
+#wrapper {
+  max-width: calc(100vw - 320px); /* subtract settings panel width */
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2em;
+  box-sizing: border-box;
+}
